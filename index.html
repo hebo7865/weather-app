@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bree+Serif&family=Nunito:ital,wght@0,200..1000;1,200..1000&family=PT+Sans+Caption:wght@400;700&family=Pacifico&family=Righteous&display=swap" rel="stylesheet">
+    <title>Weather App</title>
+    <link rel="icon" href="images/favicon.png">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    
+    <main class="d-flex justify-content-center align-items-center">
+
+        <div class="container rounded-3 w-50 mt-3">
+
+            <div class="search-bar p-3 d-flex justify-content-between rounded-3">
+                <div class="search d-flex align-items-center w-100 p-2">
+                    <label for="cityName"></label>
+                    <input type="text" id="cityName" autocomplete="off" placeholder="Enter City Name..." class="form-control">
+                </div>
+                <div class="search-btn p-2">
+                    <button type="button" id="searchBtn" class="btn bg-white">
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                    </button>
+                </div>
+            </div>
+
+            <div class="weather-description">
+                <div class="row">
+                    <div class="col-12 py-3">
+    
+                        <div class="row">
+
+                            <div id="todayTemp" class="col-md-6">
+                               
+                            </div>
+
+                            <div id="description" class="col-md-6 text-center pt-3">
+
+                                
+
+                            </div>
+
+                        </div>
+
+                    </div>
+                    
+                    <div class="row" id="week">
+
+                    </div>
+
+
+                </div>
+            </div>
+
+
+        </div>
+
+        
+
+    </main>
+
+    <script src="js/bootstrap.bundle.min.js"></script>
+    <script src="js/script.js"></script>
+</body>
+</html>

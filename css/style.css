@@ -1,0 +1,20 @@
+body{
+    font-family: "Nunito", sans-serif;
+}
+
+main{
+    min-height: 100vh;
+    background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url(../images/bg.jpg);
+    background-position: center;
+    background-size: cover;
+}
+
+main .container{
+    background-image: linear-gradient(rgba(250, 250, 250, 0.4), rgba(250, 250, 250, 0.4));
+    box-shadow: 0 0 5px rgba(250, 250, 250, 0.9);
+    border: 1px solid white;
+}
+
+.today{
+    border-block: 1px solid white;
+}
