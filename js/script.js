@@ -15,6 +15,12 @@ searchBtn.addEventListener('click', ()=>{
     getWeather();
 })
 
+cityName.addEventListener('keyup', (e)=>{
+    if(e.key == 'Enter'){
+        getWeather();
+    }
+})
+
 
 async function getWeather(){
 
@@ -23,8 +29,15 @@ async function getWeather(){
 
     JSON.stringify(data)
 
-    currentTempreture.push(data.list[0])
+    if(response.ok){
+        document.querySelector(".error").classList.add('d-none')
+    }else{
+        document.getElementById("errorMsg").innerHTML = data.message
+        document.querySelector(".error").classList.remove('d-none')
+    }
 
+    console.log(data);
+    currentTempreture.push(data.list[0])
 
     for(var i = 0; i < data.list.length;i++){
         if(data.list[i].dt_txt.includes("00:00:00")){
@@ -36,18 +49,21 @@ async function getWeather(){
         }
     }
 
-    for(var i = 0; i < minTempreture.length; i++)
+    for(var i = 0; i < data.list.length; i++)
         {
-            var allDays= ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
-            var d = new Date(minTempreture[i].dt * 1000);
-            var dayName = allDays[d.getDay()];
-            days.push(dayName)
+            if(i % 8 == 0){
+                var allDays= ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+                var d = new Date(data.list[i].dt * 1000);
+                var dayName = allDays[d.getDay()];
+                days.push(dayName)
+            }
         }
 
     displayTodayWeather();
     displayWeekWeather();
     clearVars();
     clearInput();
+    document.querySelector(".weather-description").classList.remove("d-none")
 }
 
 function clearInput(){
@@ -94,7 +110,7 @@ function displayTodayWeather(){
         <div class="temp-img w-25">
             <img class="w-100" src="${img}" alt="${currentTempreture[0].weather[0].description}">
         </div>
-        <h1 class="temp m-0">${Math.round(currentTempreture[0].main.temp)}<span>&deg;c</span></h1>
+        <h1 class="today-temp m-0">${Math.round(currentTempreture[0].main.temp)}<span>&deg;c</span></h1>
         <h3 class="city-info text-capitalize m-0">${cityName.value}</h3>
         <h6>${days[0]}</h6>
     </div>
@@ -118,7 +134,7 @@ function displayTodayWeather(){
     </div>
     `
 
-    const todayTemp = document.getElementById("todayTemp").innerHTML = temp;
+    document.getElementById("todayTemp").innerHTML = temp;
     description.innerHTML = descr;
 }
 
@@ -130,17 +146,19 @@ function displayWeekWeather(){
 
     for(var i = 1; i < minTempreture.length; i++){
         item += `
-        <div class="col-lg-3 col-md-6 text-center p-2">
+        <div class="col-lg-3 col-md-6 text-center temp p-2">
 
-            <div class="item-img">
-                <img class="w-50" src="${img}" alt="${maxTempreture[i].weather[0].description}">
-            </div>
+        <div class="temp-container">
+        <div class="item-img">
+            <img class="w-50" src="${img}" alt="${maxTempreture[i].weather[0].description}">
+        </div>
 
-            <div class="item-description">
-                <h6>${days[i]}</h6>
-                <p>Min Temp: ${Math.round(minTempreture[i].main.temp_min)}<span>&deg;c</span></p>
-                <p>Max Temp ${Math.round(maxTempreture[i].main.temp_max)}<span>&deg;c</span></p>
-            </div>
+        <div class="item-description">
+            <h6>${days[i]}</h6>
+            <p>Min Temp: ${Math.round(minTempreture[i].main.temp_min)}<span>&deg;c</span></p>
+            <p>Max Temp ${Math.round(maxTempreture[i].main.temp_max)}<span>&deg;c</span></p>
+        </div>
+    </div>
                         
         </div>
         `
